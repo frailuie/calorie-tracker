@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;400;500&family=Noto+Sans:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-base.min.js"></script>
+    <title>calorie counter | frailuie</title>
+    <link rel="shortcut icon" type="image/jpg" href="/food/favicon.png"/>
+</head>
+<body>
+
+<div class="background">
+    <div class="counter-container">
+            <button onclick="this.parentNode.querySelector('#budget').stepDown()" id="minusBtn"><i class="fa-solid fa-minus"></i></button>
+            <label for="budget"></label>
+            <input id="budget" type="number" min="0" placeholder="Select a calorie budget or enter your own" list="datalistOptions" step="100" required>
+            <datalist id="datalistOptions">
+                <option value="1200">
+                <option value="1300">
+                <option value="1500">
+                <option value="2000">
+                <option value="2500">
+                <option value="3000">
+            </datalist>
+            <button onclick="this.parentNode.querySelector('#budget').stepUp()" id="plusBtn"><i class="fa-solid fa-plus"></i></button>
+    </div>
+    
+    
+    <div class="grid-container">
+        <div class="addFood">
+            <img class="icon-img" src="/apple-icon.png" alt="">
+            <button id="addFoodBtn" type="button"><i class="fa-solid fa-circle-plus"></i></button>
+    
+            <div id="foodModal" class="modal" data-keyboard="false" data-backdrop="static">
+                <div class="food-modal-content">
+                  <span class="closeFood">&times;</span>
+
+                  <div class="sidebar">
+                    <div class="sidebar-container">
+                    </div>
+                  </div>
+                  <div class="food-icons">
+                    <span>
+                        <div id="select-category-food"><label for="entry-dropdown">Select a category </label>
+                        &nbsp;&nbsp;<select id="entry-dropdown" name="options">
+                          <option value="breakfast" selected>Breakfast</option>
+                          <option value="snacks">Snacks</option>
+                          <option value="lunch">Lunch</option>
+                          <option value="dinner">Dinner</option>
+                          <option value="dessert">Dessert</option>
+                        </select>
+                        </div>
+                      </span>
+                      <br>
+                      <br>
+
+                    <!-- fruit -->
+                    <img src="food/apple.png" alt="Apple" class="food-icon" data-value="93" data-emoji="🍏">
+                    <img src="food/strawberry.png" alt="Strawberry" class="food-icon" data-value="49" data-emoji="🍓">
+                    <img src="food/banana.png" alt="Banana" class="food-icon" data-value="89" data-emoji="🍌">
+                    <img src="food/orange.png" alt="Orange" class="food-icon" data-value="86" data-emoji="🍊">
+                    <img src="food/mango.png" alt="Mango" class="food-icon" data-value="99" data-emoji="🥭">
+                    <img src="food/coconut.png" alt="Coconut" class="food-icon" data-value="159" data-emoji="🥥">
+                    <img src="food/watermelon.png" alt="Watermelon" class="food-icon" data-value="46" data-emoji="🍉">
+                    <div class="line-break"><hr class="hr2"></div>
+                    <!-- vegetables -->
+                    <img src="food/avocado.png" alt="Avocado" class="food-icon" data-value="227" data-emoji="🥑">
+                    <img src="food/broccoli.png" alt="Broccoli" class="food-icon" data-value="20" data-emoji="🥦">
+                    <img src="food/carrot.png" alt="Carrot" class="food-icon" data-value="52" data-emoji="🥕">
+                    <img src="food/corn.png" alt="Corn" class="food-icon" data-value="133" data-emoji="🌽">
+                    <img src="food/sweet potato.png" alt="Sweet Potato" class="food-icon" data-value="115" data-emoji="🍠">
+                    <img src="food/potato.png" alt="Baked Potato" class="food-icon" data-value="134" data-emoji="🥔">
+                    <img src="food/salad.png" alt="Salad w/ Dressing" class="food-icon" data-value="150" data-emoji="🥗">
+                    <div class="line-break"><hr class="hr2"></div>
+                    <!-- breakfast foods -->
+                    <img src="food/bacon.png" alt="2 Pieces of Bacon" class="food-icon" data-value="92" data-emoji="🥓">
+                    <img src="food/pancakes.png" alt="Stack of Pancakes" class="food-icon" data-value="390" data-emoji="🥞">
+                    <img src="food/fruit yogurt.png" alt="Fruit Yogurt" class="food-icon" data-value="160" data-emoji="🥣">
+                    <img src="food/eggs.png" alt="Egg" class="food-icon" data-value="98" data-emoji="🍳">
+                    <img src="food/cereal.png" alt="Bowl of Cereal" class="food-icon" data-value="147" data-emoji="🥣">
+                    <div class="line-break"><hr class="hr2"></div>
+                    <!-- carbs -->
+                    <img src="food/bread-loaf.png" alt="Slice of White Bread" class="food-icon" data-value="80" data-emoji="🍞">
+                    <img src="food/sandwich.png" alt="Turkey Sandwich" class="food-icon" data-value="350" data-emoji="🥪">
+                    <img src="food/popcorn.png" alt="Popcorn" class="food-icon" data-value="51" data-emoji="🍿">
+                    <img src="food/chips.png" alt="Potato Chips" class="food-icon" data-value="315" data-emoji="😋">
+                    <img src="food/chocolate.png" alt="Chocolate" class="food-icon" data-value="250" data-emoji="🍫">
+                    <img src="food/ice cream.png" alt="Ice Cream" class="food-icon" data-value="200" data-emoji="🍦">
+                    <img src="food/cookie.png" alt="Chocolate Chip Cookie" class="food-icon" data-value="220" data-emoji="🍪">
+                    <img src="food/macaron.png" alt="2 French Macarons" class="food-icon" data-value="110" data-emoji="😋">
+                    <img src="food/strawberry cheesecake.png" alt="Strawberry Cheesecake" class="food-icon" data-value="374" data-emoji="🍰">
+                    <img src="food/candy.png" alt="Candy" class="food-icon" data-value="250" data-emoji="🍭">
+                    <div class="line-break"><hr class="hr2"></div> 
+
+                    <!-- meals -->
+                    <img src="food/chinese food.png" alt="Takeout Chinese Food" class="food-icon" data-value="700" data-emoji="🥡">
+                    <img src="food/sushi.png" alt="Sushi" class="food-icon" data-value="330" data-emoji="🍣">
+                    <img src="food/burrito.png" alt="Burrito" class="food-icon" data-value="390" data-emoji="🌯">
+                    <img src="food/hamburger.png" alt="Hamburger" class="food-icon" data-value="390" data-emoji="🍔">
+                    <img src="food/fried chicken.png" alt="Fried Chicken" class="food-icon" data-value="410" data-emoji="🍗">
+                    <img src="food/pizza.png" alt="Pepperoni Pizza" class="food-icon" data-value="370" data-emoji="🍕">
+                    <img src="food/french fries.png" alt="French Fries" class="food-icon" data-value="320" data-emoji="🍟">
+                    <div class="line-break"><hr class="hr2"></div>
+
+                    <!-- meat-->
+                    <img src="food/steak.png" alt="Steak" class="food-icon" data-value="278" data-emoji="🥩">
+                    <img src="food/turkey.png" alt="Turkey" class="food-icon" data-value="234" data-emoji="🦃">
+                    <img src="food/chicken.png" alt="Chicken" class="food-icon" data-value="279" data-emoji="🐔">
+                    <img src="food/shrimp.png" alt="Shrimp" class="food-icon" data-value="100" data-emoji="🍤">
+                    <img src="food/fish.png" alt="Fish" class="food-icon" data-value="90" data-emoji="🎣">
+                    <div class="line-break"><hr class="hr2"></div>
+
+                    <!-- beverages -->
+                    <img src="food/milk.png" alt="Glass of Whole Milk" class="food-icon" data-value="160" data-emoji="🥛">
+                    <img src="food/oat milk.png" alt="Glass of Oat Milk" class="food-icon" data-value="120" data-emoji="🥛">
+                    <img src="food/soda.png" alt="Soda" class="food-icon" data-value="175" data-emoji="🥤">
+                    <img src="food/green tea.png" alt="Tea" class="food-icon" data-value="60" data-emoji="🍵">
+                    <br>
+
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+    
+        <div class="categories">
+            <fieldset id="breakfast"><legend>Breakfast</legend>
+                <div class="input-container">
+                    <div id="selected-food-breakfast"></div>
+                </div>
+            </fieldset>
+    
+            <fieldset id="snack"><legend>Snack</legend>
+                <div class="input-container">
+                    <div id="selected-food-snacks"></div>
+                </div>
+            </fieldset>
+            
+            <fieldset id="lunch"><legend>Lunch</legend>
+                <div class="input-container">
+                    <div id="selected-food-lunch"></div>
+                </div>
+            </fieldset>
+    
+            <fieldset id="dinner"><legend>Dinner</legend>
+                <div class="input-container">
+                    <div id="selected-food-dinner"></div>
+                </div>
+            </fieldset>
+    
+            <fieldset id="dessert"><legend>Dessert</legend>
+                <div class="input-container">
+                    <div id="selected-food-dessert"></div>
+                </div>
+            </fieldset>
+    
+            <fieldset id="exercise"><legend>Exercise</legend>
+                <div class="input-container">
+                    <div id="selected-exercise"></div>
+    
+                </div>
+            </fieldset>
+        </div>
+    
+        <div class="addExercise">
+            <img class="icon-img" src="dumbell-icon.png" alt="">
+            <button id="addExerciseBtn" type="button"><i class="fa-solid fa-circle-plus"></i></button>
+    
+            <div id="exerciseModal" class="modal" data-keyboard="false" data-backdrop="static">
+                <div class="modal-content">
+                  <span class="closeExercise">&times;</span>
+                  <div class="exercise-icons">
+                    <span>
+                        <div id="select-category-exercise"><label for="exercise-entry" id=""><sup>*45m of activity</sup></label>
+                            &nbsp;&nbsp;<select id="exercise-entry" name="options">
+                          <option value="exercise" selected>Exercise</option>
+                        </select>
+                        </div>
+                      </span>
+                    <br>
+                    <br>
+
+                    <!-- aerobic -->
+                    <img src="exercise/cycling.png" alt="Cycling" class="exercise-icon" data-value="188" data-emoji="🚲">
+                    <img src="exercise/running.png" alt="Running" class="exercise-icon" data-value="268" data-emoji="👟">
+                    <img src="exercise/wheelchair.png" alt="Wheelchair Exercise Routine" class="exercise-icon" data-value="140" data-emoji="♿">
+                    <img src="exercise/hiking.png" alt="Hiking" class="exercise-icon" data-value="107" data-emoji="🥾">
+                    <img src="exercise/canoeing.png" alt="Canoeing" class="exercise-icon" data-value="150" data-emoji="🛶">
+                    <div class="tooltip">
+                        <img src="exercise/pilates.png" alt="Pilates" class="exercise-icon" data-value="215" data-emoji="😓">
+                        <span class="tooltiptext">Pilates</span>
+                    </div>
+                    <img src="exercise/jumping rope.png" alt="Jumping Rope" class="exercise-icon" data-value="442" data-emoji="🪢">
+                    <img src="exercise/dancing.png" alt="Dancing" class="exercise-icon" data-value="161" data-emoji="🪩">
+
+                    <div class="line-break"><hr class="hr2"></div>
+
+
+                    <!-- strength -->
+                    <img src="exercise/deadlift.png" alt="Deadlifting" class="exercise-icon" data-value="322" data-emoji="🏋️‍♀️">
+                    <img src="exercise/bench.png" alt="Bench Pressing" class="exercise-icon" data-value="233" data-emoji="🏋️‍♂️">
+
+                    <div class="line-break"><hr class="hr2"></div>
+
+                    <!-- sports -->
+                    <img src="exercise/basketball.png" alt="Playing Basketball" class="exercise-icon" data-value="242" data-emoji="🏀">
+                    <img src="exercise/tennis.png" alt="Playing Tennis" class="exercise-icon" data-value="268" data-emoji="🎾">
+                    <img src="exercise/soccer.png" alt="Playing Soccer" class="exercise-icon" data-value="376" data-emoji="⚽">
+                    <img src="exercise/boxing.png" alt="Boxing" class="exercise-icon" data-value="295" data-emoji="🥊">
+                    <img src="exercise/bowling.png" alt="Bowling" class="exercise-icon" data-value="161" data-emoji="🎳">
+                    <img src="exercise/skateboard.png" alt="Skateboarding" class="exercise-icon" data-value="268" data-emoji="🛹">
+
+                    <div class="line-break"><hr class="hr2"></div>
+                    <!-- stretching -->
+                    <div class="tooltip">
+                        <img src="exercise/gymnastics.png" alt="Gymnastics" class="exercise-icon" data-value="204" data-emoji="🤸">
+                        <span class="tooltiptext">Gymnastics</span>
+                    </div>
+                    
+                    <img src="exercise/yoga.png" alt="Yoga" class="exercise-icon" data-value="107" data-emoji="🧘‍♀️">
+
+                    <div class="line-break"><hr class="hr2"></div>
+                    <!-- daily activities -->
+                    <img src="exercise/cleaning.png" alt="Cleaning Up" class="exercise-icon" data-value="188" data-emoji="🧹">
+                    <img src="exercise/laundry.png" alt="Doing Laundry" class="exercise-icon" data-value="165" data-emoji="👚">
+                    <img src="exercise/stairs.png" alt="Taking the Stairs" class="exercise-icon" data-value="215" data-emoji="🚶‍♀️">
+
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div class="total">
+        <button id ="total-calories"><i class="fa-regular fa-square-plus"></i></button><h3>Total Calories</h3>
+            <p id="description"><em >Can't see any data?</em> 🧐 Make sure to enter in your weight and ideal weight to see a line graph showing how long in weeks it'll take to reach your target.</p> 
+        
+        <div class="column-layout">
+            <div id="display-calories"></div>
+            <div id="display-remaining-calories"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="addWeight">
+            <span>
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" min="0" max="800" placeholder="Enter your weight here..." list="weightList"/>
+                     <datalist id="weightList">
+                        <option value="100">
+                        <option value="125">
+                        <option value="145">
+                        <option value="160">
+                        <option value="180">
+                        <option value="200">
+                        <option value="225">
+                        <option value="245">
+                        <option value="260">
+                        <option value="280">
+                        <option value="300">
+                     </datalist>
+            </span>
+        </div>
+            
+        <div class="addIdealWeight">
+            <span>
+                <label for="idealWeight">Ideal Weight:</label>
+                <input type="number" id="idealWeight" min="0" max="800" placeholder="Enter your weight here..." list="idealWeightList"/>
+                    <datalist id="idealWeightList">
+                         <option value="100">
+                        <option value="125">
+                        <option value="145">
+                        <option value="160">
+                        <option value="180">
+                        <option value="200">
+                        <option value="225">
+                        <option value="245">
+                        <option value="260">
+                        <option value="280">
+                        <option value="300">
+                    </datalist>
+            </span>
+        </div>
+
+       <p id="weight-advisory" style="font-size: 12px; font-family: 'Noto Sans', sans-serif;">
+            *Always seek advice from a health professional before starting a diet or intense exercise routine. This tool is arbitrary and should only be used with the understanding that it only uses average values, and assumes that you will consume the same average amount of calories for a week.
+
+
+            <div id="display-line-graph"></div>
+    </div>
+</div>
+
+   
+
+<script src="calorie.js"></script>
+</body>
+</html>
+   

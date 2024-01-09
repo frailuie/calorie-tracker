@@ -1,0 +1,454 @@
+* {
+    margin: 0;
+}
+
+body {
+    background: rgb(248, 246, 232);
+}
+
+
+.background {
+    width: 100vw;
+    display: grid;
+    background-image: linear-gradient(385deg, rgb(248, 246, 232), rgb(253, 251, 240));
+    align-items: center;
+    justify-content: center;
+
+}
+
+/* change scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+  
+  ::-webkit-scrollbar-thumb {
+    background: #f4d3b6;
+    width: 12px;
+    border-radius: 10px;
+}
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f3ebeb;
+    transition: .3s ease-in;
+}
+
+
+/* container for budget calorie bar and buttons */
+.counter-container {
+    background: linear-gradient(#f9f3ca, #f9e1bd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: first baseline;
+    justify-content: space-evenly;
+    padding: 20px;
+    margin: 40px 0px 20px 230px;
+    width: 500px;
+    border-radius: 3px;
+} 
+
+#budget {
+    width: 80%;
+    padding: 4px;
+    margin: 0px 2px 0px -4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid rgb(196, 186, 186);
+
+}
+
+#minusBtn, #plusBtn {
+    background: transparent;
+    border-radius: 10px;
+}
+
+#minusBtn:hover, #plusBtn:hover {
+    background-color: black;
+    transition: .3s ease-in;
+} 
+
+.fa-minus, .fa-plus {
+    font-size: 16px;
+    color: #f8f4f9;
+}
+
+.fa-minus:hover, .fa-plus:hover {
+    color: #f4ebab;
+}
+
+
+/* remove calorie budget arrows */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* container holding the first row of grids */
+.grid-container {
+    display: grid; 
+    grid-template-columns: 2fr 3fr 2fr; 
+    grid-template-rows: auto 1fr; 
+    grid-auto-rows: min-content;
+    width: 1000px;
+    gap: 20px 20px; 
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+}
+
+.addFood, .addExercise {
+    background-color: rgba(255, 216, 149, 0.244);
+    border-radius: 12%;
+    height: 300px;
+}
+
+/* plus sign buttons */
+#addFoodBtn, #addExerciseBtn {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    position: relative;
+    top: 28%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+    border: 1px transparent;
+    background-color: transparent;
+}
+
+#addFoodBtn:hover, #addExerciseBtn:hover {
+    color: #f6d27d;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+}
+
+.icon-img {
+    position: relative;
+    top: 27%;
+    left: 25%;
+    height: 95px;
+    width: 95px;
+}
+
+
+/* styling for the modals */
+.modal, .exerciseModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.food-modal-content {
+    background-color: #fefefe;
+    margin: 10vh auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 38%;
+    max-height: calc(80vh - 40px);
+    overflow-y: auto;
+}
+
+  
+.modal-content {
+    background-color: #fefefe;
+    margin: 10vh auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 50%;
+    max-height: calc(80vh - 40px);
+    overflow-y: auto;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: rgb(25, 24, 24);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 4px 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 70%;
+    margin-left: -60px;
+}
+  
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+.line-break {
+    display: block;
+    content: "";
+    height: .9em;
+    clear: both;
+}
+
+/* styling linebreak inside of modal */
+.hr2 {
+    height: 1px;
+    background-color: rgba(163, 160, 160, 0.727);
+    border: none;
+
+}
+  
+.closeFood, .closeExercise {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+  
+.food-icons, .exercise-icons {
+    display: inline-block;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+  
+.food-icon, .exercise-icon {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin: 6px;
+    padding: .5px;
+}
+  
+.food-icon.selected, .exercise-icon.selected {
+    border: 2.5px solid transparent;
+    border-color: rgb(243, 103, 61);
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#select-category-food, #select-category-exercise {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* center grid - categories for entries */
+.categories {
+    background: linear-gradient(rgba(255, 236, 204, 0.989), rgba(246, 232, 208, 0.964));
+    color:#282626;
+    padding: 20px;
+    width: 543px;
+    text-align: center;
+    font-weight: 300;
+    line-height: 5ch;
+}
+
+.added-entry {
+    background-color: #FDFBF0;
+    color: rgb(20, 20, 20);
+    border-radius: 2px;
+    margin: 3px;
+    padding: 2px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+
+}
+
+hr {
+    border: none;
+    background-color: rgba(163, 163, 168, 0.741);
+    height: 1px;
+    margin-top: -10px;
+}
+
+/* contains total calories, description etc */
+.total {
+    background: linear-gradient(#f9f3ca, #f9e1bd);
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    padding: 20px;
+    margin: 15px 0px 20px 230px;
+    width: 500px;
+    gap: 10px;
+    border-radius: 3px;
+}
+
+/* total calories button */
+#total-calories {
+    font-size: 24px;
+    background: transparent;
+    border-style: none;
+    grid-column: 1;
+    grid-row: 1;
+    margin-left: -90px;
+    margin-top: 5px;
+    width: 200px;
+
+}
+
+.fa-square-plus {
+    color: rgb(29, 27, 27);
+}
+
+.fa-square-plus:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+}
+
+/* total calories header */
+h3 {
+    font-family: 'Barlow', sans-serif;
+    font-size: 28px;
+    margin-left: 30px;
+    grid-row: 1;
+    grid-column: 1;
+
+}
+
+/* instructions for users */
+#description {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 15px;
+    margin-left: 2px;
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    display: none;
+
+}
+
+.column-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* display total calories and surplus/deficit */
+.display-calories, .display-remaining-calories {
+    width: 230px;
+    border: 1px solid black;
+}
+
+.added-calories {
+    background-color: #fff8f8d2;
+    color: rgb(23, 22, 22);
+    border-radius: 2px;
+    margin: 3px;
+    padding: 10px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+
+
+/* contains weight boxes and line graph */
+.container {
+    margin: 15px 0px 0px 180px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+    padding: 25px;
+    background: linear-gradient(#f9e1bd, #f9f3ca);
+    height: auto;
+    width: 600px;
+}
+
+/* weight box div */
+.addWeight {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* ideal weight div */
+.addIdealWeight {
+    grid-column: 2;
+    grid-row: 1;
+
+}
+
+/* weight boxes */
+.addWeight, .addIdealWeight {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    background-color: rgba(249, 249, 227, 0.263);
+}
+
+/* weight forms */
+#weight {
+    width: 150px;
+
+}
+
+#idealWeight {
+    width: 150px;
+
+}
+
+#weight, #idealWeight {
+    text-align: center;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+#weight-advisory {
+    grid-column: 1 / span 2;
+}
+
+/* line graph */
+#display-line-graph {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    display: block;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
